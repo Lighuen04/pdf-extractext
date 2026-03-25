@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PDF Extractext - Aplicación FastAPI de Grado de Producción
 
 Una aplicación FastAPI orientada a producción para extracción de texto de PDF y resumen con IA usando una **arquitectura empresarial de 3 capas** (API, Aplicación, Infraestructura).
@@ -493,3 +494,7 @@ Para problemas, preguntas o sugerencias:
 ---
 
 **¡Feliz codificación! 🎉**
+=======
+# pdf-extractext
+This repository is focused on processing and making use of content from PDF files. Its purpose is to facilitate the extraction and transformation of information contained in these documents so that it can later be used across different contexts, workflows, or applications
+>>>>>>> d04a5d6 (Initial commit)
