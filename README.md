@@ -496,5 +496,31 @@ Para problemas, preguntas o sugerencias:
 **¡Feliz codificación! 🎉**
 =======
 # pdf-extractext
+<<<<<<< HEAD
 This repository is focused on processing and making use of content from PDF files. Its purpose is to facilitate the extraction and transformation of information contained in these documents so that it can later be used across different contexts, workflows, or applications
 >>>>>>> d04a5d6 (Initial commit)
+=======
+
+Extraer texto de un pdf que es proporcionado por el usuario. Despues 
+se hace un resumen gracias a un modelo de IA
+
+## Tecnologias
+- Python
+- UV
+- Modelo de IA (a definir)
+- Ollama
+- Base de datos no relacional MongoDB
+
+## Metodologia 
+
+- TDD
+- Proyecto dirigido en github 
+- Los seis primeros principios de 12factorAPP
+
+## Principios de programación
+
+- KISS 
+- DRY
+- YAGNI
+- SOLID
+>>>>>>> 6788b16 (Actualizacion readme)
