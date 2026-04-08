@@ -1,19 +1,19 @@
-"""Pytest configuration and fixtures."""
+import asyncio
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-import asyncio
-from typing import AsyncGenerator
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
-from unittest.mock import AsyncMock
+from fastapi.testclient import TestClient
+from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from main import create_app, app
+import main
+import src.infrastructure.database.connection as connection
+from main import create_app
 from src.config import Settings
+from src.infrastructure import get_database
 
 
-# Configure pytest for async tests
 @pytest.fixture(scope="session")
 def event_loop():
-    """Create event loop for async tests."""
     loop = asyncio.get_event_loop_policy().new_event_loop()
     yield loop
     loop.close()
@@ -21,7 +21,6 @@ def event_loop():
 
 @pytest.fixture
 def settings() -> Settings:
-    """Provide test settings."""
     return Settings(
         DEBUG=True,
         MONGODB_URL="mongodb://localhost:27017",
@@ -30,28 +29,37 @@ def settings() -> Settings:
 
 
 @pytest.fixture
-async def mock_database() -> AsyncGenerator[AsyncIOMotorDatabase, None]:
-    """Provide a mock MongoDB database for testing."""
-    # Create a mock database
-    mock_db = AsyncMock(spec=AsyncIOMotorDatabase)
+def mock_database() -> AsyncIOMotorDatabase:
+    mock_db = MagicMock(spec=AsyncIOMotorDatabase)
+
+    mock_collection = MagicMock()
+    mock_cursor = MagicMock()
+
+    mock_cursor.to_list = AsyncMock(return_value=[])
+    mock_cursor.skip.return_value = mock_cursor
+    mock_cursor.limit.return_value = mock_cursor
+
+    mock_collection.find.return_value = mock_cursor
+    mock_db.__getitem__.return_value = mock_collection
     mock_db.command = AsyncMock(return_value={"ok": 1})
-    yield mock_db
+
+    return mock_db
 
 
 @pytest.fixture
-async def test_app():
-    """Provide a test FastAPI application instance."""
-    test_settings = Settings(
-        DEBUG=True,
-        MONGODB_URL="mongodb://localhost:27017",
-        MONGODB_DATABASE="pdf_extractext_test",
-    )
-    return create_app(test_settings)
+def test_app(settings, mock_database, monkeypatch):
+    monkeypatch.setattr(main, "connect_database", AsyncMock(return_value=None))
+    monkeypatch.setattr(main, "disconnect_database", AsyncMock(return_value=None))
+
+    app = create_app(settings)
+
+    app.dependency_overrides[get_database] = lambda: mock_database
+    app.dependency_overrides[connection.get_database] = lambda: mock_database
+
+    return app
 
 
 @pytest.fixture
-def test_client():
-    """Provide a test client for API testing."""
-    from fastapi.testclient import TestClient
-    
-    return TestClient(app)
+def test_client(test_app):
+    with TestClient(test_app) as client:
+        yield client
