@@ -3,7 +3,7 @@
 import pytest
 import asyncio
 from typing import AsyncGenerator
-from motor.motor_asyncio import AsyncClient, AsyncDatabase
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from unittest.mock import AsyncMock
 
 from main import create_app, app
@@ -30,10 +30,10 @@ def settings() -> Settings:
 
 
 @pytest.fixture
-async def mock_database() -> AsyncGenerator[AsyncDatabase, None]:
+async def mock_database() -> AsyncGenerator[AsyncIOMotorDatabase, None]:
     """Provide a mock MongoDB database for testing."""
     # Create a mock database
-    mock_db = AsyncMock(spec=AsyncDatabase)
+    mock_db = AsyncMock(spec=AsyncIOMotorDatabase)
     mock_db.command = AsyncMock(return_value={"ok": 1})
     yield mock_db
 
