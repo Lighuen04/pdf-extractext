@@ -44,7 +44,5 @@ class ExtractTextUseCase:
                 return None
         except Exception as e:
             # Update status to failed with error message
-            await self.document_service.update_document_status(
-                document_id, "failed", str(e)
-            )
+            await self.document_service.update_document_status(document_id, "failed", str(e))
             return None

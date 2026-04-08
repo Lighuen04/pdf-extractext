@@ -8,7 +8,6 @@ from src.api.routes import health, documents
 
 
 def create_app(settings: Settings) -> FastAPI:
-
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         await connect_database()
@@ -19,7 +18,7 @@ def create_app(settings: Settings) -> FastAPI:
         title=settings.APP_NAME,
         version=settings.APP_VERSION,
         debug=settings.DEBUG,
-        lifespan=lifespan
+        lifespan=lifespan,
     )
 
     # Routers

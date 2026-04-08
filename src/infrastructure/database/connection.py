@@ -24,7 +24,9 @@ class MongoDBConnection:
     async def connect(self) -> None:
         """Establish MongoDB connection."""
         settings = get_settings()
-        self._client = AsyncClient(settings.MONGODB_URL, serverSelectionTimeoutMS=settings.MONGODB_TIMEOUT)
+        self._client = AsyncClient(
+            settings.MONGODB_URL, serverSelectionTimeoutMS=settings.MONGODB_TIMEOUT
+        )
         self._database = self._client[settings.MONGODB_DATABASE]
         # Verify connection
         await self._database.command("ping")

@@ -25,4 +25,3 @@ __all__ = [
     "SummarizationResponse",
     "get_di_container",
 ]
-

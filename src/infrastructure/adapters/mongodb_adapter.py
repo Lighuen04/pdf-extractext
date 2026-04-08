@@ -6,7 +6,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase as AsyncDatabase
 
 class MongoDBAdapter:
     """Adapter for MongoDB database operations.
-    
+
     Provides a higher-level interface for common database operations.
     """
 

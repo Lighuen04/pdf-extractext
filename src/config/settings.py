@@ -9,24 +9,24 @@ class Settings(BaseSettings):
     APP_NAME: str = "PDF Extractext"
     APP_VERSION: str = "0.1.0"
     DEBUG: bool = False
-    
+
     # Server
     HOST: str = "0.0.0.0"
     PORT: int = 8000
-    
+
     # MongoDB
     MONGODB_URL: str = "mongodb://localhost:27017"
     MONGODB_DATABASE: str = "pdf_extractext"
     MONGODB_TIMEOUT: int = 5000
-    
+
     # API
     API_PREFIX: str = "/api/v1"
     CORS_ORIGINS: list[str] = ["*"]
-    
+
     # File handling
     MAX_FILE_SIZE_MB: int = 100
     UPLOAD_DIR: str = "./uploads"
-    
+
     # Feature flags (for future expansion)
     ENABLE_AUTH: bool = False
     ENABLE_RATE_LIMITING: bool = False

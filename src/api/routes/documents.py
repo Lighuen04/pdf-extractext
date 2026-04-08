@@ -21,17 +21,17 @@ async def upload_document(
     database: AsyncDatabase = Depends(get_database),
 ) -> DocumentResponse:
     """Upload a new PDF document.
-    
+
     Args:
         request: Document creation request
         database: MongoDB database instance
-        
+
     Returns:
         Created document information
     """
     di_container = DIContainer()
     use_case = di_container.get_upload_document_use_case(database)
-    
+
     try:
         document = await use_case.execute(
             filename=request.filename,
@@ -62,24 +62,24 @@ async def get_document(
     database: AsyncDatabase = Depends(get_database),
 ) -> DocumentResponse:
     """Retrieve a document by ID.
-    
+
     Args:
         document_id: ID of the document
         database: MongoDB database instance
-        
+
     Returns:
         Document information
     """
     di_container = DIContainer()
     document_service = di_container.get_document_service(database)
-    
+
     document = await document_service.get_document(document_id)
     if not document:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Document not found",
         )
-    
+
     return DocumentResponse(
         id=document.id,
         filename=document.filename,
@@ -99,20 +99,20 @@ async def list_documents(
     database: AsyncDatabase = Depends(get_database),
 ) -> DocumentListResponse:
     """List all documents with pagination.
-    
+
     Args:
         skip: Number of documents to skip
         limit: Maximum number of documents to return
         database: MongoDB database instance
-        
+
     Returns:
         List of documents
     """
     di_container = DIContainer()
     document_service = di_container.get_document_service(database)
-    
+
     documents = await document_service.list_documents(skip=skip, limit=limit)
-    
+
     return DocumentListResponse(
         total=len(documents),
         skip=skip,
@@ -139,14 +139,14 @@ async def delete_document(
     database: AsyncDatabase = Depends(get_database),
 ):
     """Delete a document.
-    
+
     Args:
         document_id: ID of the document to delete
         database: MongoDB database instance
     """
     di_container = DIContainer()
     document_service = di_container.get_document_service(database)
-    
+
     result = await document_service.delete_document(document_id)
     if not result:
         raise HTTPException(

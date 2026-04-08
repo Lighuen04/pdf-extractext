@@ -16,25 +16,25 @@ class ExtractionService:
         self, document_id: str, file_path: str
     ) -> Optional[ExtractionResultDTO]:
         """Extract text from a PDF file.
-        
+
         Args:
             document_id: ID of the document
             file_path: Path to the PDF file
-            
+
         Returns:
             ExtractionResultDTO or None if extraction fails
         """
         start_time = time.time()
-        
+
         try:
             # Extract text using adapter
             extracted_text = await self.pdf_extractor.extract_text(file_path)
-            
+
             if not extracted_text:
                 return None
 
             extraction_time_ms = (time.time() - start_time) * 1000
-            
+
             return ExtractionResultDTO(
                 document_id=document_id,
                 extracted_text=extracted_text,

@@ -30,9 +30,7 @@ class SummarizeTextUseCase:
 
         try:
             # Summarize text
-            result = await self.summarization_service.summarize_text(
-                document_id, text, max_length
-            )
+            result = await self.summarization_service.summarize_text(document_id, text, max_length)
 
             if result:
                 # Update status to completed
@@ -46,7 +44,5 @@ class SummarizeTextUseCase:
                 return None
         except Exception as e:
             # Update status to failed with error message
-            await self.document_service.update_document_status(
-                document_id, "failed", str(e)
-            )
+            await self.document_service.update_document_status(document_id, "failed", str(e))
             return None

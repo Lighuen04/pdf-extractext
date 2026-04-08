@@ -28,7 +28,7 @@ class DocumentService:
             file_path=file_path,
             uploaded_by=uploaded_by,
         )
-        
+
         # Retrieve the created document
         doc = await self.document_repository.get_document_by_id(doc_id)
         return self._to_dto(doc)

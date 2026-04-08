@@ -23,4 +23,3 @@ __all__ = [
     "SummarizeTextUseCase",
     "UploadDocumentUseCase",
 ]
-

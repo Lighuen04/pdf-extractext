@@ -38,8 +38,7 @@ class BaseRepository(Generic[T]):
         """Update a document."""
         try:
             result = await self.collection.update_one(
-                {"_id": ObjectId(document_id)},
-                {"$set": data}
+                {"_id": ObjectId(document_id)}, {"$set": data}
             )
             return result.modified_count > 0
         except Exception:

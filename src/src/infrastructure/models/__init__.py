@@ -3,4 +3,3 @@
 from infrastructure.models import DocumentModel
 
 __all__ = ["DocumentModel"]
-

@@ -16,7 +16,7 @@ async def health_check(
     database: AsyncDatabase = Depends(get_database),
 ) -> HealthCheckResponse:
     """Health check endpoint.
-    
+
     Returns the status of the application and database connectivity.
     """
     # Check database connection

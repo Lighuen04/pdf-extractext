@@ -25,4 +25,3 @@ __all__ = [
     "disconnect_database",
     "get_database",
 ]
-
