@@ -10,7 +10,8 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [
-    {name = "Lighuen Amigo", email = "eluamigo@protonmail.com"}
+    {name = "Lighuen Amigo", email = "eluamigo@protonmail.com"},
+    {name = "Gianluca Pluchino", email = "gianplu55@gmail.com"}
 ]
 
 dependencies = [
@@ -22,6 +23,7 @@ dependencies = [
     "motor==3.3.2",
     "python-multipart==0.0.6",
     "python-dotenv==1.0.0",
+    "httpx<0.28"
 ]
 
 [project.optional-dependencies]
