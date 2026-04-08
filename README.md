@@ -3,7 +3,7 @@
 
 Una aplicación FastAPI orientada a producción para extracción de texto de PDF y resumen con IA usando una **arquitectura empresarial de 3 capas** (API, Aplicación, Infraestructura).
 
-## 🏗️ Descripción General de la Arquitectura
+##  Descripción General de la Arquitectura
 
 Este proyecto sigue una **arquitectura limpia** con clara separación de responsabilidades:
 
@@ -27,7 +27,7 @@ Este proyecto sigue una **arquitectura limpia** con clara separación de respons
 - **Settings**: Gestión de configuración basada en variables de entorno
 - **Constants**: Constantes de aplicación global
 
-## 🚀 Inicio Rápido
+##  Inicio Rápido
 
 ### Requisitos Previos
 
@@ -139,7 +139,7 @@ docker run -d \
   pdf-extractext:latest
 ```
 
-## 📁 Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```
 pdf-extractext/
@@ -235,7 +235,7 @@ curl -X POST http://localhost:8000/api/v1/documents \
   }'
 ```
 
-## 🧪 Pruebas
+##  Pruebas
 
 ### Ejecutar Todas las Pruebas
 
@@ -309,7 +309,7 @@ black src/ tests/ && isort src/ tests/ && flake8 src/ tests/ && mypy src/
 3. Agrega configuración a `src/config/settings.py` si es necesario
 4. Crea un adaptador en `src/infrastructure/adapters/` si es un servicio externo
 
-## 📝 Configuración de Entorno
+##  Configuración de Entorno
 
 Crea un archivo `.env` desde la plantilla:
 
@@ -329,7 +329,7 @@ Variables de configuración clave:
 | `API_PREFIX` | /api/v1 | Ruta base de API |
 | `MAX_FILE_SIZE_MB` | 100 | Tamaño máximo de archivo de carga |
 
-## 🔐 Consideraciones de Seguridad
+##  Consideraciones de Seguridad
 
 - [ ] Habilitar autenticación (no implementado en MVP)
 - [ ] Habilitar limitación de velocidad para producción
@@ -339,7 +339,7 @@ Variables de configuración clave:
 - [ ] Usar gestión de secretos para datos sensibles
 - [ ] Habilitar autenticación en MongoDB
 
-## 📦 Dependencias
+##  Dependencias
 
 ### Dependencias Principales
 - **FastAPI**: Marco web
@@ -357,7 +357,7 @@ Variables de configuración clave:
 
 Ver `pyproject.toml` para la lista completa de dependencias.
 
-## 🚀 Despliegue en Producción
+##  Despliegue en Producción
 
 ### Lista de Verificación Previa al Despliegue
 
@@ -473,7 +473,7 @@ find . -type d -name __pycache__ -exec rm -r {} +
 
 Este proyecto está licenciado bajo la Licencia MIT - ver archivo LICENSE para más detalles.
 
-## 👥 Contribuyendo
+##  Contribuyendo
 
 ¡Las contribuciones son bienvenidas! Por favor sigue el flujo de trabajo de desarrollo y asegúrate de:
 
@@ -482,7 +482,7 @@ Este proyecto está licenciado bajo la Licencia MIT - ver archivo LICENSE para m
 3. Incluye anotaciones de tipos
 4. La documentación esté actualizada
 
-## 📞 Soporte
+##  Soporte
 
 Para problemas, preguntas o sugerencias:
 
@@ -491,8 +491,8 @@ Para problemas, preguntas o sugerencias:
 3. Abre un problema en GitHub
 4. Contacta al equipo de desarrollo
 
----
 
+<<<<<<< HEAD
 **¡Feliz codificación! 🎉**
 =======
 # pdf-extractext
@@ -524,3 +524,5 @@ se hace un resumen gracias a un modelo de IA
 - YAGNI
 - SOLID
 >>>>>>> 6788b16 (Actualizacion readme)
+=======
+>>>>>>> 23155a3 (Refactor README.md to remove emoji from section headers for consistency)
