@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # PDF Extractext - Aplicación FastAPI de Grado de Producción
 
 Una aplicación FastAPI orientada a producción para extracción de texto de PDF y resumen con IA usando una **arquitectura empresarial de 3 capas** (API, Aplicación, Infraestructura).
@@ -197,7 +196,7 @@ pdf-extractext/
 └── README.md                    # Este archivo
 ```
 
-## 🔌 Puntos Finales de API
+## Puntos Finales de API
 
 ### Verificación de Estado
 ```
@@ -264,7 +263,7 @@ pytest -v
 pytest tests/unit/test_services.py::TestDocumentService::test_create_document -v
 ```
 
-## 🛠️ Flujo de Trabajo de Desarrollo
+## Flujo de Trabajo de Desarrollo
 
 ### Herramientas de Calidad de Código
 
@@ -422,7 +421,7 @@ spec:
           periodSeconds: 10
 ```
 
-## 🐛 Solución de Problemas
+## Solución de Problemas
 
 ### Error de Conexión a MongoDB
 
@@ -438,7 +437,7 @@ Get-Service MongoDB
 docker ps | grep mongodb
 ```
 
-### Puerto ya en Uso
+### Puerto ya en uso
 
 ```bash
 # Encuentra proceso usando puerto 8000
@@ -461,7 +460,7 @@ pip install -e .
 find . -type d -name __pycache__ -exec rm -r {} +
 ```
 
-## 📚 Recursos Adicionales
+## Recursos Adicionales
 
 - [Documentación de FastAPI](https://fastapi.tiangolo.com/)
 - [Documentación de Pydantic](https://docs.pydantic.dev/)
@@ -469,7 +468,7 @@ find . -type d -name __pycache__ -exec rm -r {} +
 - [Documentación de MongoDB](https://docs.mongodb.com/)
 - [Guía de Arquitectura Limpia](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - ver archivo LICENSE para más detalles.
 
@@ -477,52 +476,16 @@ Este proyecto está licenciado bajo la Licencia MIT - ver archivo LICENSE para m
 
 ¡Las contribuciones son bienvenidas! Por favor sigue el flujo de trabajo de desarrollo y asegúrate de:
 
-1. Todas las pruebas pasen
-2. El código esté formateado con Black
-3. Incluye anotaciones de tipos
-4. La documentación esté actualizada
+1. Todas las pruebas pasen.
+2. El código esté formateado con Black.
+3. Incluye anotaciones de tipos.
+4. La documentación esté actualizada.
 
 ##  Soporte
 
 Para problemas, preguntas o sugerencias:
 
-1. Consulta la sección de solución de problemas
-2. Revisa la documentación de API en `/docs`
-3. Abre un problema en GitHub
-4. Contacta al equipo de desarrollo
-
-
-<<<<<<< HEAD
-**¡Feliz codificación! 🎉**
-=======
-# pdf-extractext
-<<<<<<< HEAD
-This repository is focused on processing and making use of content from PDF files. Its purpose is to facilitate the extraction and transformation of information contained in these documents so that it can later be used across different contexts, workflows, or applications
->>>>>>> d04a5d6 (Initial commit)
-=======
-
-Extraer texto de un pdf que es proporcionado por el usuario. Despues 
-se hace un resumen gracias a un modelo de IA
-
-## Tecnologias
-- Python
-- UV
-- Modelo de IA (a definir)
-- Ollama
-- Base de datos no relacional MongoDB
-
-## Metodologia 
-
-- TDD
-- Proyecto dirigido en github 
-- Los seis primeros principios de 12factorAPP
-
-## Principios de programación
-
-- KISS 
-- DRY
-- YAGNI
-- SOLID
->>>>>>> 6788b16 (Actualizacion readme)
-=======
->>>>>>> 23155a3 (Refactor README.md to remove emoji from section headers for consistency)
+1. Consulta la sección de solución de problemas.
+2. Revisa la documentación de API en `/docs`.
+3. Abre un problema en GitHub.
+4. Contacta al equipo de desarrollo.
