@@ -1,9 +1,6 @@
-"""Document repository for PDF document operations."""
-
 from datetime import datetime
 from typing import Any, Optional
 from motor.motor_asyncio import AsyncIOMotorDatabase as AsyncDatabase
-from bson import ObjectId
 
 from .base_repository import BaseRepository
 from src.infrastructure.models import DocumentModel
@@ -24,7 +21,6 @@ class DocumentRepository(BaseRepository):
         mime_type: str = "application/pdf",
         uploaded_by: Optional[str] = None,
     ) -> str:
-        """Create a new document entry."""
         doc = {
             "filename": filename,
             "original_filename": original_filename,
@@ -41,20 +37,17 @@ class DocumentRepository(BaseRepository):
         return await self.create(doc)
 
     async def get_document_by_id(self, document_id: str) -> Optional[dict[str, Any]]:
-        """Get a document by its ID."""
         return await self.read_by_id(document_id)
 
     async def get_documents_by_status(
         self, status: str, skip: int = 0, limit: int = 10
     ) -> list[dict[str, Any]]:
-        """Get documents filtered by status."""
         cursor = self.collection.find({"status": status}).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
 
     async def update_document_status(
         self, document_id: str, status: str, error_message: Optional[str] = None
     ) -> bool:
-        """Update document status."""
         update_data = {
             "status": status,
             "updated_at": datetime.utcnow(),
@@ -62,8 +55,11 @@ class DocumentRepository(BaseRepository):
         if error_message:
             update_data["error_message"] = error_message
 
-        return await self.update(document_id, update_data)
+        result = await self.collection.update_one(
+            {"id": document_id},
+            {"$set": update_data},
+        )
+        return result.modified_count > 0
 
     async def count_documents_by_status(self, status: str) -> int:
-        """Count documents with a specific status."""
         return await self.collection.count_documents({"status": status})
