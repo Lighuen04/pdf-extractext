@@ -1,0 +1,1 @@
+"""PDF Extract-ext application."""

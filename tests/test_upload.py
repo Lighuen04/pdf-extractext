@@ -1,5 +1,6 @@
 from dataclasses import replace
 from io import BytesIO
+from unittest.mock import MagicMock
 
 from fastapi.testclient import TestClient
 from pypdf import PdfWriter
@@ -31,6 +32,29 @@ def test_upload_pdf_accepts_real_file() -> None:
     assert payload["size_bytes"] == len(pdf_bytes)
     assert payload["status"] == "uploaded"
     assert payload["extracted_text"] == ""
+
+
+def test_upload_pdf_delegates_processing_to_pdf_service(monkeypatch) -> None:
+    pdf_bytes = _build_valid_pdf_bytes()
+    files = {"file": ("documento.pdf", pdf_bytes, "application/pdf")}
+    process_mock = MagicMock(
+        return_value={
+            "document_id": "507f1f77bcf86cd799439011",
+            "document": {
+                "txt_contenido": "texto desde service",
+            },
+        }
+    )
+    monkeypatch.setattr(main_module, "process_pdf_upload", process_mock)
+
+    response = client.post("/documents/upload", files=files)
+
+    assert response.status_code == 200
+    process_mock.assert_called_once_with(
+        file_name="documento.pdf",
+        file_bytes=pdf_bytes,
+    )
+    assert response.json()["extracted_text"] == "texto desde service"
 
 
 def test_upload_pdf_rejects_non_pdf_file() -> None:
