@@ -19,18 +19,9 @@ def _build_valid_pdf_bytes() -> bytes:
     return buffer.getvalue()
 
 
-def test_upload_pdf_accepts_real_file(monkeypatch) -> None:
+def test_upload_pdf_accepts_real_file() -> None:
     pdf_bytes = _build_valid_pdf_bytes()
     files = {"file": ("documento.pdf", pdf_bytes, "application/pdf")}
-    process_mock = MagicMock(
-        return_value={
-            "document_id": "507f1f77bcf86cd799439011",
-            "document": {
-                "txt_contenido": "",
-            },
-        }
-    )
-    monkeypatch.setattr(main_module, "process_pdf_upload", process_mock)
 
     response = client.post("/documents/upload", files=files)
 
