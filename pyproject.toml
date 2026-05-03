@@ -9,6 +9,7 @@ dependencies = [
     "python-multipart",
     "pypdf",
     "PyMuPDF",
+    "pymongo==4.17.0",
 ]
 requires-python = ">=3.12"
 
@@ -24,3 +25,8 @@ packages = ["app"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.3",
+]

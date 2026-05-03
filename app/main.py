@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 from fastapi import FastAPI, File, HTTPException, UploadFile
 
 from app.settings import get_settings
-from app.services.pdf_service import InvalidPDFError, extract_text_from_pdf_bytes
+from app.services.pdf_service import InvalidPDFError, process_pdf_upload
 
 
 settings = get_settings()
@@ -30,7 +32,10 @@ async def upload_pdf(file: UploadFile = File(...)) -> dict[str, str | int]:
         raise HTTPException(status_code=400, detail="El archivo debe enviarse como application/pdf.")
 
     try:
-        extracted_text = extract_text_from_pdf_bytes(file_bytes)
+        result = process_pdf_upload(
+            file_name=file.filename or "sin_nombre.pdf",
+            file_bytes=file_bytes,
+        )
     except InvalidPDFError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
@@ -38,6 +43,6 @@ async def upload_pdf(file: UploadFile = File(...)) -> dict[str, str | int]:
         "filename": file.filename or "sin_nombre.pdf",
         "content_type": file.content_type,
         "size_bytes": len(file_bytes),
-        "extracted_text": extracted_text,
+        "extracted_text": result["document"]["txt_contenido"],
         "status": "uploaded",
     }
